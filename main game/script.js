@@ -392,7 +392,7 @@ restartGame() {
 
   goToMenu() {
     // Navigate back to start page
-    window.location.href = "./index.html";
+    window.location.href = "../index.html";
   }
 }
 
