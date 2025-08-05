@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Burst Key - Improve your typing speed with our interactive typing platform">
+    <meta name="keywords" content="typing speed, typing test, keyboard practice, typing game">
+    <meta name="author" content="Burst Key">
+    <title>Burst Key - Improve Your Typing Speed</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <h1 class="title">Welcome to Burst Key</h1>
+            <p class="subtitle">The one and only platform that will help you improve your typing speed</p>
+            
+            <form class="game-settings" id="gameForm">
+                <div class="settings-group">
+                    <div class="setting-item">
+                        <label for="difficulty">Difficulty Level</label>
+                        <select name="difficulty" id="difficulty" required>
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>           
+                        </select>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label for="timeLimit">Time Limit</label>
+                        <select name="timeLimit" id="timeLimit" required>
+                            <option value="60">1 Minute</option>
+                            <option value="120" selected>2 Minutes</option>
+                            <option value="300">5 Minutes</option>
+                            <option value="600">10 Minutes</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" id="startBtn" class="start-button">
+                   <span class="button-text">Start Typing Test</span></a>
+                    <span class="button-icon">→</span>
+                </button>
+            </form>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText"></div>
+            
+        </header>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Burst Key. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

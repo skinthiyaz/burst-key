@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Key Bubble Pop Game - Test your typing speed and accuracy">
+    <meta name="keywords" content="typing game, bubble pop, keyboard game, typing speed">
+    <meta name="author" content="Burst Key">
+    <title>Key Bubble Pop Game - Burst Key</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header with Scoreboard and Timer -->
+        <header class="game-header">
+            <div class="scoreboard">
+                <div class="score-item">
+                    <span class="label">Score:</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">Time:</span>
+                    <span class="value" id="timer">60</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">Level:</span>
+                    <span class="value" id="level">Easy</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Game Area -->
+        <main class="game-area" id="gameArea">
+            
+            <div class="game-over-screen" id="gameOverScreen" style="display: none;">
+                <h2>Game Over!</h2>
+                <div class="final-score">
+                    <p>Final Score: <span id="finalScore">0</span></p>
+                    <p>Level: <span id="finalLevel">Easy</span></p>
+                </div>
+                <div class="game-actions">
+                    <button class="restart-btn" id="restartBtn">Play Again</button>
+                    <button class="menu-btn" id="menuBtn">Back to Menu</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Instructions -->
+        <footer class="game-instructions">
+            <p>Press the correct key to pop the bubbles!</p>
+            <p>All rights resrved by @shaik Inthiyaz</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
