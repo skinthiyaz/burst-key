@@ -114,7 +114,6 @@ class KeyBubbleGame {
     }, 1000);
   }
 
-  // ...existing code...
 createBubble() {
     if (!this.gameActive) return;
 
@@ -125,54 +124,61 @@ createBubble() {
         ? 2
         : 1; // Adjust for hard level
 
+    // Get and shuffle keys/words
+    const keys = [...this.getKeysForLevel()];
+    for (let i = keys.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [keys[i], keys[j]] = [keys[j], keys[i]];
+    }
+
     for (let i = 0; i < bubblesCount; i++) {
         setTimeout(() => {
-        const keys = this.getKeysForLevel();
-        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+            // Pick a unique key/word for each bubble
+            const randomKey = keys[i % keys.length];
 
-        const bubble = document.createElement("div");
-        bubble.className = "bubble";
-        bubble.textContent = randomKey;
-        bubble.dataset.key = randomKey;
+            const bubble = document.createElement("div");
+            bubble.className = "bubble";
+            bubble.textContent = randomKey;
+            bubble.dataset.key = randomKey;
 
-        // Bubble size
-        const bubbleWidth = 80;
-        const bubbleHeight = 80;
-        const maxX = this.gameArea.clientWidth - bubbleWidth;
+            // Bubble size
+            const bubbleWidth = 80;
+            const bubbleHeight = 80;
+            const maxX = this.gameArea.clientWidth - bubbleWidth;
 
-        // Try to find a non-overlapping position
-        let x, y = -bubbleHeight;
-        let tries = 0;
-        do {
-            x = Math.random() * maxX;
-            tries++;
-        } while (
-            this.isOverlapping(x, y, bubbleWidth, bubbleHeight) && tries < 20
-        );
+            // Try to find a non-overlapping position
+            let x, y = -bubbleHeight;
+            let tries = 0;
+            do {
+                x = Math.random() * maxX;
+                tries++;
+            } while (
+                this.isOverlapping(x, y, bubbleWidth, bubbleHeight) && tries < 20
+            );
 
-        bubble.style.left = `${x}px`;
-        bubble.style.top = `${y}px`;
+            bubble.style.left = `${x}px`;
+            bubble.style.top = `${y}px`;
 
-        // Add fall duration based on level
-        let fallDuration =
-          this.level.toLowerCase() === "easy"
-            ? 7
-            : this.level.toLowerCase() === "medium"
-            ? 7
-            : 7;
-        bubble.style.animationDuration = `${fallDuration}s`;
+            // Add fall duration based on level
+            let fallDuration =
+              this.level.toLowerCase() === "easy"
+                ? 7
+                : this.level.toLowerCase() === "medium"
+                ? 7
+                : 6;
+            bubble.style.animationDuration = `${fallDuration}s`;
 
-        // Add bubble to game area
-        this.gameArea.appendChild(bubble);
+            // Add bubble to game area
+            this.gameArea.appendChild(bubble);
 
-        // Remove bubble after it falls
-        bubble.addEventListener("animationend", () => {
-            if (bubble.parentNode) {
-                bubble.remove();
-            }
-        });
-    }, i * 300)
-}
+            // Remove bubble after it falls
+            bubble.addEventListener("animationend", () => {
+                if (bubble.parentNode) {
+                    bubble.remove();
+                }
+            });
+        }, i * 300);
+    }
 
     // Continue creating bubbles every X seconds
     this.bubbleTimer = setTimeout(() => this.createBubble(), this.bubbleSpeed);
@@ -223,50 +229,19 @@ isOverlapping(x, y, width, height) {
       "N",
       "M",
     ];
-    const mediumWords = [
-      "hi",
-      "ok",
-      "hey",
-      "yo",
-      "sup",
-      "no",
-      "go",
-      "up",
-      "on",
-      "by",
-      "do",
-      "if",
-      "it",
-      "my",
-      "we",
-      "run",
-      "fun",
-      "sun",
-      "dog",
-      "cat",
-      "bat",
-      "hat",
-    ];
-    const hardWords = [
-      "world",
-      "hello",
-      "there",
-      "quick",
-      "brown",
-      "foxes",
-      "crazy",
-      "great",
-      "super",
-      "brave",
-      "smart",
-      "happy",
-      "eager",
-      "proud",
-      "clear",
-      "start",
-      "drive",
-      "build",
-    ];
+ 
+const mediumWords = [
+  "hi", "ok", "hey", "yo", "sup", "no", "go", "up", "on", "by", "do", "if", "it", "my", "we", "run", "fun", "sun", "dog", "cat", "bat", "hat",
+  "red", "big", "top", "map", "box", "car", "bus", "cup", "pen", "fan", "man", "can", "win", "sit", "hit", "fit", "log", "fog", "jam", "ram",
+  "lip", "tip", "zip", "kit", "pit", "dot", "pot", "cot", "hot", "not", "got", "wet", "jet", "net", "bet", "let", "set", "pet", "yet"
+];
+
+const hardWords = [
+  "world", "hello", "there", "quick", "brown", "foxes", "crazy", "great", "super", "brave", "smart", "happy", "eager", "proud", "clear", "start", "drive", "build",
+  "planet", "rocket", "forest", "jungle", "bridge", "castle", "dragon", "wizard", "pirate", "throne", "shadow", "legend", "spirit", "energy", "future", "moment",
+  "reason", "honest", "silent", "danger", "wonder", "travel", "market", "object", "random", "signal", "system", "trophy", "winner", "action", "motion", "vision",
+  "memory", "circle", "square", "number", "letter", "animal", "people", "friend", "family", "school", "office", "garden", "window", "mirror", "puzzle", "secret"
+];
 
     switch (this.level.toLowerCase()) {
       case "easy":
@@ -314,7 +289,7 @@ isOverlapping(x, y, width, height) {
     });
 
     if (!matched) {
-      bubble.style.background = "red"; // Optional: Add shake effect for wrong key
+   // Optional: Add shake effect for wrong key
     }
   }
 
@@ -382,9 +357,7 @@ restartGame() {
     // Reload game settings (reset timer and level)
     this.loadGameSettings();
 
-    // Hide game over screen
-    this.gameOverScreen.style.display = "none";
-
+  
     // Start a new game
     this.startGame();
 }
